@@ -1,6 +1,6 @@
 package com.springboothibernate.example.service;
 
-import com.springboothibernate.example.Tutorial;
+import com.springboothibernate.example.model.Tutorial;
 import com.springboothibernate.example.repository.TutorialRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -13,17 +13,17 @@ import java.util.Optional;
 
 @Service
 public class TutorialService implements TutorialServices{
-    @Autowired
     TutorialRepository tutorialRepository;
+
     @Override
     public ResponseEntity<List<Tutorial>> getAllTutorials(String title) {
         try {
             List<Tutorial> tutorials = new ArrayList<Tutorial>();
 
             if (title == null)
-                tutorialRepository.findAll().forEach(tutorials::add);
+                tutorials.addAll(tutorialRepository.findAll());
             else
-                tutorialRepository.findByTitleContaining(title).forEach(tutorials::add);
+                tutorials.addAll(tutorialRepository.findByTitleContaining(title));
             if (tutorials.isEmpty()) {
                 return new ResponseEntity<>(HttpStatus.OK);
             }

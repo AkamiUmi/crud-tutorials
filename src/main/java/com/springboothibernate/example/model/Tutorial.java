@@ -1,4 +1,4 @@
-package com.springboothibernate.example;
+package com.springboothibernate.example.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

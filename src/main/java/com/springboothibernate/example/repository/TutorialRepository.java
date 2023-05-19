@@ -1,6 +1,6 @@
 package com.springboothibernate.example.repository;
 
-import com.springboothibernate.example.Tutorial;
+import com.springboothibernate.example.model.Tutorial;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;

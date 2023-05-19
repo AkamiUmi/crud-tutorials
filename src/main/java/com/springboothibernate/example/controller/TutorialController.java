@@ -1,22 +1,20 @@
 package com.springboothibernate.example.controller;
 
-import com.springboothibernate.example.Tutorial;
-import com.springboothibernate.example.repository.TutorialRepository;
+import com.springboothibernate.example.model.Tutorial;
 import com.springboothibernate.example.service.TutorialServices;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @CrossOrigin(origins = "http://localhost:8081")
 @RestController
+@RequiredArgsConstructor
 @RequestMapping("/api")
 public class TutorialController {
-    TutorialServices tutorialServices;
+    private final TutorialServices tutorialServices;
 
     @GetMapping("/tutorials")
     public ResponseEntity<List<Tutorial>> getAllTutorials(@RequestParam(required = false) String title) {
@@ -28,7 +26,7 @@ public class TutorialController {
         return ResponseEntity.ok(tutorialServices.getTutorialsById(id).getBody());
     }
     @PostMapping("/tutorials")
-    public ResponseEntity<Tutorial> createTutorials(@RequestParam Tutorial tutorial) {
+    public ResponseEntity<Tutorial> createTutorials(@RequestBody Tutorial tutorial) {
         return ResponseEntity.ok(tutorialServices.createTutorials(tutorial).getBody());
     }
     @PutMapping("/tutorials/{id}")
